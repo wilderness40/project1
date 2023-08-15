@@ -1,0 +1,29 @@
+  @import url(../css/reset.css);
+  @import url(../css/header.css);
+  @import url(../css/footer.css);
+  
+  
+  
+  /* 메인파트 */
+  main{
+      width: 100%;
+      height: 100%;
+  }
+  main .wrapper{
+      max-width: 80%;
+      height: 100%;
+      margin: 0 auto;
+  }
+  main .wrapper .scripture{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #333;
+    margin: 2rem 0;
+    overflow: scroll;
+  }
+  main .wrapper .scripture .bible-contents{
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 1px dotted rgb(135, 135, 135);
+    margin: 0 auto;
+  }
