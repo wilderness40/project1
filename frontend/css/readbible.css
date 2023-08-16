@@ -1,6 +1,6 @@
   @import url(../css/reset.css);
   @import url(../css/header.css);
-  @import url(../css/footer.css);
+  /* @import url(../css/footer.css); */
   
   
   
@@ -14,10 +14,62 @@
       height: 100%;
       margin: 0 auto;
   }
+  /* 성경읽기 페이지 컨텐츠부분 */
   main .wrapper .scripture{
     width: 100%;
     height: 100%;
     border: 1px solid #333;
     margin: 2rem 0;
+    overflow: scroll;
+  }  
+  main .wrapper .buttons{
+    position: relative;
+    padding: 1rem 0;
+    display: inline-flex;
+    justify-content: center;
+    
   }
-  
+  main .wrapper .buttons button{
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    color: #333;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+
+  }
+
+  /* 성경목차 */
+  main .wrapper .scripture .scripture-list{  /* div */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 3rem 0;
+  }
+  main .wrapper .scripture .scripture-list ul{
+    margin: 0 1rem;
+  }
+  main .wrapper .scripture .scripture-list ul h3{
+    margin-bottom: 10px;
+  }
+  main .wrapper .scripture .scripture-list ul li{
+    list-style: none;
+    padding: 5px 0;
+  }
+  main .wrapper .scripture .scripture-list ul li a{
+    display: block;
+    background-color: rgb(255, 240, 221);
+    padding: 3px;
+  }
+  main .wrapper .scripture .scripture-list ul li a:hover{
+    background-color: rgb(245, 199, 138);
+    font-weight: 600;
+  }
+  /* 성경전문 */
+  main .wrapper .scripture .bible-contents{
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 1px dotted rgb(135, 135, 135);
+    margin: 0 auto;
+  }
