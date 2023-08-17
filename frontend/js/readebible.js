@@ -26,56 +26,38 @@ async function showClikedBook(e){
     await getBibleData()
     if(e.target.className == 'book'){  // && 클래스 네임이 book 으로 시작 or 정규표현식으로 b로시작
        for(let i=0; i<serverData[0].bibles.length; i++){
-
-   
+        if(e.target.id == serverData[0].bibles[i].book){
+            scriptureList.style.display = 'none'
+            displayVerse(i)
+            console.log(serverData[0].bibles[i].chapter) // 디버깅용
+       
         async function createdPagenation(){
             const pageButton = document.createElement('button')
             pageButton.classList.add('button')
         
-            chapter.push(serverData[0].bibles[i].chapter)
-            pageButton.innerText = uniqueArr
+            chapter.push(
+                
+
+            )
             const uniqueArr = [...new Set(chapter)]
+            pageButton.innerText = uniqueArr
             // console.log(chapter)
+            finalArr.push(uniqueArr)
             console.log(uniqueArr)
             
             buttons.appendChild(pageButton)
         }
             createdPagenation()
-           
+
           }
           
-        if(e.target.id == serverData[0].bibles[i].book){
-            scriptureList.style.display = 'none'
-            displayVerse(i)
+
 
     
       }   
     }
 }
 scriptureList.addEventListener('click', showClikedBook)
-
-// 챕터에 따라 verse 표시하기 (페이지네이션)
-// 페이지수와 챕터가 일치할 경우에 해당 verse를 표기한다
-
-async function createdPagenation(){
-    await getBibleData()
-    for(let i=0; i<serverData[0].bibles.length; i++){
-    const pageButton = document.createElement('button')
-    pageButton.classList.add('button')
-
-    chapter.push(serverData[0].bibles[i].chapter)
-    // pageButton.innerText = 
-    const uniqueArr = [...new Set(chapter)]
-    // console.log(chapter)
-console.log(uniqueArr)
-    // buttons.appendChild(pageButton)
-    }
-}
-    createdPagenation()
-    
-
-
-// 자바스크립트 중복제거 set
 
 // Verse 표시하기
 function displayVerse(parameter){ 
@@ -88,11 +70,6 @@ function displayVerse(parameter){
 
 
 /*뒤로가기 구현 - 어중간한 구현 */
-// 뒤로가기 및 안보이게는 성공했는데, url 주소는 바뀌지 않는다, 변경하면 화면이 업데이트 되지않음..
-
-// window.onload = function() {
-//     console.log(window.location.href)
-// }
 
 window.onpopstate  = function(event) {
     event.stopPropagation()
