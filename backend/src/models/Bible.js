@@ -24,6 +24,10 @@ content: {
     type: String,
     required : true,
 },
+title: {
+    type: String,
+    required : true,
+},
 })
 
 const Bible = mongoose.model('Bible', bibleSchema, 'bibles')

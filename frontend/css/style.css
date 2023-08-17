@@ -19,6 +19,7 @@ header nav {
 }
 
 header h1 a {
+  font-family: "Russo One", sans-serif;
   font-size: 2rem;
   color: #fff;
 }
@@ -147,13 +148,18 @@ main .wrapper .random-paragraph {
 }
 
 main .wrapper .random-paragraph h3 {
-  font-size: 1.5rem;
+  max-width: 80%;
+  margin: 0 auto;
+  font-size: 1.3rem;
   font-weight: 400;
+  font-family: "Noto Serif KR", serif;
 }
 
 main .wrapper .random-paragraph p {
+  margin-top: 1rem;
   font-size: 1rem;
   font-weight: 400;
+  font-family: "Noto Serif KR", serif;
 }
 
 main .wrapper .multi-contents {

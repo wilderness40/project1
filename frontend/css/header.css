@@ -17,6 +17,7 @@ header nav{
     padding: 1rem 2rem;
 }
 header h1 a{
+    font-family: 'Russo One', sans-serif;
     font-size: 2rem;
     color: #fff;
 }
@@ -25,7 +26,6 @@ header h1 a{
 } */
 header .menu-btn a{ 
     font-size: 1.1rem;
-    font-weight: 600;
     color: #fff;
     padding: 0 1rem;
     margin-left: 1rem;

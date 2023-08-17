@@ -13,7 +13,7 @@ router.get('/', expressAsyncHandler(async(req, res) => {
     try{
     const bibles = await Bible.find({})
     res.status(200).json({ code: 200, message: '성경조회 성공', bibles})
-    console.log(bibles)
+    // console.log(bibles)
 } catch(err){
     res.status(500).send()
 }
