@@ -38,7 +38,7 @@ function deleteTitle(){
  function createTitle(){
         const bookTitle = document.createElement('h3')
         bookTitle.className = 'book-title'
-        bookTitle.innerHTML = `${e.target.innerText}&nbsp${displayChpater(pageNum)}장` 
+        bookTitle.innerHTML = `${e.target.innerText}&nbsp${pageNum}장` 
         mainWrapper.insertAdjacentElement('afterbegin', bookTitle) // 본문 위에 삽입
         console.log(pageNum)
     }
@@ -84,7 +84,6 @@ function deleteTitle(){
                     const active = buttonGroup.querySelector('.active')
                     
                     pageNum = e.target.innerText
-                    displayChpater(pageNum)
                     console.log(pageNum)
                     if(active){
                         active.classList.remove('active')
@@ -115,10 +114,6 @@ function deleteTitle(){
 }
 scriptureList?.addEventListener('click', showClikedBook) // 성경의 각 책이름을 클릭하면 본문을 보여주는 함수
 
-// 타이틀에 페이지수 넣기
-function displayChpater(pageNum){
-    return pageNum
-}
 
 // Verse 표시하기
 function displayVerse(parameter){ 
