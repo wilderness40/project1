@@ -23,36 +23,68 @@
     overflow-y: scroll;
   }  
   main .wrapper .buttons{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    height: 50px;
+    width: 800px;
     position: relative;
     padding: 1rem 0;
-    /* display: flex; */
+    display: flex;
     text-align: center;
-    /* justify-content: center; */
-    /* align-items: center; */
+    justify-content: center;
+    align-items: center;
   }
   main .wrapper .buttons button{
+    margin: .2rem;
     padding: .2rem .2rem;
+    width: 35px;
+    height: 35px;
     margin-bottom: 3rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #333;
     background: transparent;
     border: 0;
-    outline: 0;
     cursor: pointer;
   }
   main .wrapper .buttons button:hover{
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
     background-color: rgb(245, 197, 108);
     color: #fff;
     border-radius: 50%;
   }
   .active{ 
     font-weight: 600;
+  }
+  .all-btn{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+  }
+  .prev-button{  /* 이전페이지로 이동버튼 */
+    width: 50px;
+    height: 50px;
+    padding: .5rem .5rem;
+    margin-right: .5rem;
+    font-size: 1.5rem;
+    background-color: rgb(245, 197, 108);
+    border-radius: 50%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  .next-button{  /* 다음페이지로 이동버튼 */
+    width: 50px;
+    height: 50px;
+    padding: .5rem .5rem;
+    margin-left: .5rem;
+    font-size: 1.5rem;
+    background-color: rgb(245, 197, 108);
+    border-radius: 50%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  .prev-button:hover,
+  .next-button:hover{
+    background-color: rgb(240, 181, 73);
   }
 
   /* 성경목차 */
