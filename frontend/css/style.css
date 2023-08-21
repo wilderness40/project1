@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(../css/reset.css);
 @import url(../css/footer.css);
 header {
@@ -79,7 +80,7 @@ header .login-btn a:hover {
 
 main {
   width: 100%;
-  height: 100%;
+  height: 150vh;
 }
 
 main .wrapper {
@@ -91,13 +92,12 @@ main .wrapper {
 main .wrapper form {
   width: 68rem;
   height: 100px;
-  position: relative;
   display: flex;
   flex-shrink: 1;
   margin: 0 auto;
 }
 
-main .wrapper form input {
+main .wrapper input {
   width: 50rem;
   height: 3.5rem;
   border: none;
@@ -112,14 +112,14 @@ main .wrapper form input {
   z-index: 5;
 }
 
-main .wrapper form input:focus {
+main .wrapper input:focus {
   background: rgba(255, 255, 255, 0.7);
 }
 
-main .wrapper form .input-btn {
+main .wrapper .input-btn {
   position: absolute;
-  bottom: 170px;
-  right: 100px;
+  top: 272px;
+  right: 250px;
   transform: translate(-50%, -50%);
   padding: 1rem 0.8rem;
   border: none;
@@ -130,7 +130,7 @@ main .wrapper form .input-btn {
   z-index: 5;
 }
 
-main .wrapper form .input-btn:hover {
+main .wrapper .input-btn:hover {
   background-color: rgb(44, 104, 214);
   font-weight: 600;
   cursor: pointer;
@@ -183,6 +183,26 @@ main .wrapper .multi-contents .pray-note {
   border: 1px solid #333;
 }
 
+/* 스크롤바 꾸미기 - 시작 */
+::-webkit-scrollbar {
+  width: 18px; /*스크롤바의 너비*/
+  height: 0;
+  cursor: help;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(187, 187, 187); /*스크롤바의 색상*/
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgb(61, 53, 53);
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(214, 214, 214); /*스크롤바 트랙 색상*/
+}
+
+/* 스크롤바 꾸미기 - 끝*/
 @media (max-width: 420px) {
   header .menu-btn {
     display: none;

@@ -22,6 +22,24 @@
     margin: 2rem 0;
     overflow-y: scroll;
   }  
+
+  main .wrapper .scripture::-webkit-scrollbar {
+    width: 10px; /*스크롤바의 너비*/
+  }
+  main .wrapper .scripture::-webkit-scrollbar-thumb {
+   background-color: rgb(102, 102, 102); /*스크롤바의 색상*/
+   border-radius: 15rem;
+  }
+  main .wrapper .scripture::-webkit-scrollbar-thumb:active {
+    background-color: rgb(61, 53, 53);
+  }
+   
+  main .wrapper .scripture::-webkit-scrollbar-track {
+    background-color: rgb(194, 194, 194); /*스크롤바 트랙 색상*/
+    border-radius: 15rem;
+  }
+
+
   main .wrapper .buttons{
     width: 800px;
     position: relative;

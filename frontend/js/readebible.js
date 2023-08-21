@@ -191,10 +191,10 @@ function displayVerse(parameter){
 
 window.onpopstate  = function(event) {
     event.stopPropagation()
-    console.log(event)
+    // console.log(event)
 if(!(event && window.location.href.includes('#'))){    
     scriptureList.style.display = 'flex' // 뒤로가기 했을때 목차 다시나오기
-
+    // pushstate('', '', 'readbible')
     const bibleContents = document.querySelectorAll('.bible-contents') // 뒤로가기 했을때 성경본문 삭제
     bibleContents.forEach((content)=> {
         content.remove()
@@ -206,6 +206,7 @@ if(!(event && window.location.href.includes('#'))){
     const bookTitle = mainWrapper.querySelector('.book-title')
     if(bookTitle) mainWrapper.removeChild(bookTitle)  // 뒤로가기 했을때 타이틀 삭제
 }
+
 }
    
 

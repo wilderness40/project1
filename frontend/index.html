@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,6 @@
     <title>Sola-Scriptura</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&family=Noto+Serif+KR:wght@200;300;400;500;600&family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/readebible.js" defer></script>
     <script src="./js/app.js" defer></script>
 </head>
 <body>
@@ -30,10 +29,11 @@
 <!-- 메인파트 -->
     <main>
       <div class="wrapper">
-        <form action="#" method="post">
-            <input type="search" id="serachbible" placeholder="단어나 구절을 검색해보세요">
-            <button class="input-btn">검색</button>
+        <form action="http://127.0.0.1:5500/html/searchPage.html" method="get" accept-charset="UTF-8" > <!-- onsubmit="submitCheck()" --> 
+            <input type="search" id="serachbible" placeholder="단어나 구절을 검색해보세요" required>
+            <button class="input-btn" type="submit">검색</button>
         </form>
+    <div class="contents">
       <div class="random-paragraph"><br></div>  
       <div class="multi-contents">
         <div class="bible-game"><h3>성경암기 게임</h3></div>
@@ -41,6 +41,7 @@
       </div>  
 
       </div>
+    </div>
     </main>
 <!-- 푸터파트 -->
     <footer></footer>
