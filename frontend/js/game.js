@@ -28,17 +28,21 @@ async function getBibleText(){
     <li>${serverData[0].psalms[randomNum].title}&nbsp${serverData[0].psalms[randomNum].chapter}장&nbsp${serverData[0].psalms[randomNum].verse}절</li><li>${serverData[0].psalms[randomNum].content}</li>`
     typingContent.appendChild(bibleText)
 
+ // 한글자씩 풀어서 span태그로 감싸주기   
     const bibletextLi = typingContent.querySelectorAll('.bibleText-ul li')
-    bibletextLi.forEach(span => {
-        bibleText.innerHTML =''
-        let spanTag = `<span>${span}</span>`
-        bibleText.innerHTML += spanTag
+    bibletextLi.forEach(li => {
+        // console.log(li)
+        // console.log(li.innerText.split(''))
+        const spanText = li.innerText.split('').map(char => {
+               return char.replace(char, `<span>${char}</span>`)
+            })
+            console.log(spanText)
+        console.log(textWindow.innerText)
+        textWindow.addEventListener('keydown',e=>{
+            console.log(e.target.value)
+            
         })
-
-        // console.log(li.innerText.split('').join(`<span>${li.innerText.split('')[li.innerText.split('').length-1]}</span>`))
-
- 
+})
 }
-
 
 (async () => await getBibleText())()
