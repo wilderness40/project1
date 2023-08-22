@@ -105,6 +105,15 @@
     background-color: rgb(240, 181, 73);
   }
 
+  /* 출처표시 문구 */
+  .source{
+    display: inline-block;
+    text-align: right;
+    position: relative;
+    left: 81%;
+    top: 8%;
+  }
+
   /* 성경목차 */
   main .wrapper .scripture .scripture-list{  /* div */
     display: flex;

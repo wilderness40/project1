@@ -19,9 +19,10 @@ async function getBibleData(){
 }
 
 
+
 /* 검색 결과 보여주기 */    
 // 검색 content 표시하기
-function displayContent(updateResults, searchWord){
+async function displayContent(updateResults, searchWord){
     for(let i= 0; i < updateResults.length; i++){
         const bookChapter = document.createElement('h4') 
         const searchContent = document.createElement('p')
@@ -37,29 +38,32 @@ function displayContent(updateResults, searchWord){
             searchContent.innerHTML = searchContent.innerHTML.split(searchWord).join(`<span class='highlight'>${searchWord}</span>`)            
         }
     }
-    const moreViewBtn = document.createElement('button') 
-    contents.appendChild(moreViewBtn)
-
-    moreViewBtn.innerText = '더보기'
-    moreViewBtn.className = 'moreview-btn'
-
-    moreViewBtn.addEventListener('click',()=>{
-        contents.style.overflow = 'scroll'
-        moreViewBtn.remove()
-    })
 }
 
 
 // 검색결과 가져오기
-
 async function showSearchBible(){
-    await getBibleData()
+    displayLoadingImg() // 로딩화면 보여주기
+    await getBibleData() // 서버데이터 가져오기
+// 로딩화면 가리고 리스트 보여주기 (데이터 다 가져왔으니)
+    const loadingPhrases = document.querySelector('.loading-Phrases') 
+    loadingPhrases.remove()
+
       const updateResults = await serverData[0].bibles.filter(bibles => {
         if(searchWord){
             return bibles.content.includes(searchWord)
       }
       })
-    displayContent(updateResults, searchWord)    
+// 로딩화면 문구 만드는 함수      
+        function displayLoadingImg(){
+           const logding = document.createElement('h2')
+           logding.innerText ='검색결과를 가져오고 있습니다'
+           logding.className = 'loading-Phrases'
+           contents.appendChild(logding) 
+        }
+        
+    displayContent(updateResults, searchWord)   
+    
 }
 
 showSearchBible()

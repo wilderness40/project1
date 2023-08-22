@@ -12,7 +12,7 @@ const form = document.querySelector('form')
 let serverData = []
 let updateResults = []
 
-// 서버데이터 가져오기
+// 성경 서버데이터 가져오기
 async function getBibleData(){
     try{
     const data = await fetch('http://127.0.0.1:3300/api/bible/')
@@ -24,10 +24,25 @@ async function getBibleData(){
 }
 } 
 
+// 랜덤 이미지 배경데이터 가져오기
+async function getImageData(){
+    try{
+    const data = await fetch(`https://api.unsplash.com/search/photos?query=background img&page=${Math.floor(Math.random()*334)}&per_page=35&client_id=NNmNL2OOluBZlE9VpvVPQKXW7p0vm0dCkz2n8dFIAUA&;`) // page랜덤설정 총페이지수 334페이지
+    const imgData = await data.json()
+
+    for(let i = 0; i < imgData.results.length; i++){
+    ramdomPargraph.style.backgroundImage = `url(${imgData.results[Math.floor(Math.random() * i)]?.urls.regular})`
+}
+}catch(error){
+    console.log(error)
+}
+}
+
 // 성경 랜덤 구절 
 // 배경이미지는 pixabay나 unsplash에서 랜덤으로 떙겨오자, 특정 키워드의 이미지만 떙겨오도록 설정
 async function createRandomVerse(){
     await getBibleData()
+    await getImageData()
     const h3 = document.createElement('h3')
     const randomNum = Math.floor(Math.random() * 31102)
     h3.innerHTML = `${serverData[0].bibles[randomNum].content}<br><p>${serverData[0].bibles[randomNum].title}&nbsp${serverData[0].bibles[randomNum].chapter}장 ${serverData[0].bibles[randomNum].verse}절</p>`

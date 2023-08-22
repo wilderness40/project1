@@ -10,6 +10,7 @@ const router = express.Router()
 
 // 성경전문조회
 router.get('/', expressAsyncHandler(async(req, res) => {
+    console.log(req.query)
     try{
     const bibles = await Bible.find({})
     res.status(200).json({ code: 200, message: '성경조회 성공', bibles})
@@ -18,6 +19,21 @@ router.get('/', expressAsyncHandler(async(req, res) => {
     res.status(500).send()
 }
 }))
+
+// 시편조회
+router.get('/psalms', expressAsyncHandler(async(req, res)=> {
+    // 전체 리스트
+try{
+    const { title } = req.query
+    // console.log(title)
+    const psalms = await Bible.find({title: "시편"})
+    res.status(200).json({code:200, message: '시편조회 성공', psalms})
+}catch(err){
+    res.status(500).send()
+    console.log(err)
+}
+
+})) 
 //성경구절추가
 router.post('/', expressAsyncHandler(async(req, res) => {
     const searchedBible = await Bible.find({ })

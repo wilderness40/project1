@@ -34,7 +34,13 @@ function deleteTitle(){
     await getBibleData()
     
     if(e.target.className == 'book'){   // 빈공간 클릭시 작동하지 않도록 설정  
-      
+// 출처 표시 : 대한성서공회, 개역한글
+function diplaySource(){
+    const source = document.createElement('h4')
+    source.innerText = '개역한글[대한성서공회]'
+    source.className = 'source'
+    mainWrapper.insertAdjacentElement('beforebegin', source)
+}      
 // 성경책 이름 가져오기 (for문 안에 넣으면 안된다)
  function createTitle(firstPage){
         console.log(firstPage)
@@ -43,6 +49,7 @@ function deleteTitle(){
         bookTitle.innerHTML = `${e.target.innerText}&nbsp${firstPage}장` 
         mainWrapper.insertAdjacentElement('afterbegin', bookTitle) // 본문 위에 삽입
     }
+    diplaySource()
     deleteTitle()
     createTitle(pageNum)
 // 첫 화면은 1장을 가져오도록 설정 
