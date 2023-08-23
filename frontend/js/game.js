@@ -49,10 +49,10 @@ const textSpan = typingContent.querySelectorAll('span')
 
 
 // 텍스트 입력창 
-textWindow.addEventListener('input',e=>{
+textWindow.addEventListener('input',e=>{   
     const inputSpanText = e.target.value
+    console.log(inputSpanText)
     let typedText = inputSpanText.split('')
-
     if(textSpan[charIndex].innerText === typedText[charIndex]){ // 글자가 일치할 경우
         textSpan[charIndex].classList.add('correct')
         textSpan[charIndex].classList.remove('incorrect')
@@ -66,10 +66,11 @@ textWindow.addEventListener('input',e=>{
     else{   // 글자가 불일치할 경우
         textSpan[charIndex].classList.add('incorrect')
     }
+
 })
 
 // 버튼 생성
-cp
+
 
 
 }
