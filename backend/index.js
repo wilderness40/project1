@@ -6,6 +6,8 @@ const axios = require('axios')
 const cors = require('cors')
 const config  = require('./config')
 const biblesRouter = require('../backend/src/routes/bibles')
+const usersRouter = require('../backend/src/routes/users')
+const praysRouter = require('../backend/src/routes/prays')
 
 // 몽고 DB 연결
 mongoose.connect(config.MONGODB_URL)
@@ -24,6 +26,8 @@ app.use(logger('tiny')) // logger 설정
 
 
 app.use('/api/bible', biblesRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/prays', praysRouter)
 
 // API 설계
 app.get('/hello', (req, res) => {

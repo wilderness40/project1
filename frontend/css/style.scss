@@ -237,12 +237,24 @@ main .wrapper .multi-contents .pray-note{
     opacity: .8;
     transform: rotateZ(-3deg);
 }
+.bible-game h3{
+    font-size: 2rem;
+    text-align: center;
+    color: #fff;
+    padding-top: 5rem;
+}
 .pray-note{
     cursor: pointer;
 }
 .pray-note:hover{
     opacity: .8;
     transform: rotateZ(-3deg);
+}
+.pray-note h3{
+    font-size: 2rem;
+    text-align: center;
+    color: #fff;
+    padding-top: 5rem;
 }
 
 @media (max-width: 420px) {
