@@ -1,6 +1,6 @@
 // 전역변수
 const main = document.querySelector('main')
-const typingContent = document.querySelector('.bible-content')
+// const typingContent = document.querySelector('.bible-content')
 
 let charIndex = 0
 let index = 1
@@ -21,13 +21,19 @@ async function getBibleData(){
 
 //  HTML 뼈대 DOM생성
 function createTextField(){
+
+// 가장 바깥의 div (초기화 대상)
+    const typingContent = document.createElement('div')
+    typingContent.className ='bible-content'
+    main.appendChild(typingContent)
     
+
 // 상단 TITLE
     const bibleTitle = document.createElement('h3')
     bibleTitle.innerHTML =`시편&nbsp${index}편`
     bibleTitle.className = 'bible-title'
 
-// 본문 form & TEXTAREA & BUTTON   
+// 본문 FORM & TEXTAREA & BUTTON      
     const form = document.createElement('form')
     form.setAttribute("action", '#')
     form.innerHTML =`  
@@ -48,11 +54,15 @@ function createTextField(){
 
     const bibleText = document.createElement('div')
     bibleText.className = 'bible-Text'
+    
+    typingContent.append(bibleTitle, bibleText)
+   
     typingContent.insertAdjacentElement('afterbegin', bibleTitle) 
     textWindow.insertAdjacentElement('beforebegin', bibleText) 
 
 // 변수반환    
     return { 
+        typingContent,
         form, 
         bibleTitle,
         textWindow,
@@ -64,6 +74,8 @@ function createTextField(){
 }
 // 반환함수 호출
 const { 
+    typingContent,
+    form,
     bibleTitle,
     textWindow,
     bibleText,
@@ -73,7 +85,6 @@ const {
 
 // 시편본문가져오기
 async function getBibleText(){
-
     await getBibleData()
 
 // 시편본문 생성하기
@@ -131,14 +142,15 @@ textWindow.addEventListener('keyup',e=>{
     e.preventDefault()
     if(index < serverData[0].psalms.length - 1)  {
         index++
-    console.log(bibleText.innerHTML)// 디버깅용
-    console.log(typingContent.innerHTML)
-    typingContent.innerHTML=''
-    console.log(typingContent.innerHTML)
-    createTextField()      
-    getBibleText()
+     
+        console.log(bibleTitle)
+        bibleText.innerHTML=''
+        bibleTitle.innerHTML=''
+        textWindow.innerText=''
+        const {bibleTitle, bibleText, textWindow} = createTextField()
 
-        
+        await getBibleText()       
+  
 
     console.log(bibleText.innerHTML)// 디버깅용
     }else if(index == serverData[0].psalms.length - 1){
@@ -153,7 +165,8 @@ prevButton.addEventListener('click', (e)=>{
     if(index > 1)  {
     index--
     typingContent.innerHTML =''
-    createTextField()
+    bibleTitle.innerHTML =''
+    const {bibleText, bibleTitle} = createTextField()
     getBibleText()
     }
 })
