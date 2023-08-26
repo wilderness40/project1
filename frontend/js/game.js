@@ -1,6 +1,5 @@
 // 전역변수
 const main = document.querySelector('main')
-const typingContent = document.querySelector('.bible-content')
 
 let charIndex = 0
 let index = 1
@@ -21,13 +20,17 @@ async function getBibleData(){
 
 //  HTML 뼈대 DOM생성
 function createTextField(){
+// 테두리 가상 DOM형성
+    const typingContent = document.createElement('div')
+    typingContent.className = 'bible-content'
+    main.appendChild(typingContent)
     
 // 상단 TITLE
     const bibleTitle = document.createElement('h3')
     bibleTitle.innerHTML =`시편&nbsp${index}편`
     bibleTitle.className = 'bible-title'
 
-// 본문 form & TEXTAREA & BUTTON   
+// 본문 FORM & TEXTAREA & BUTTON   
     const form = document.createElement('form')
     form.setAttribute("action", '#')
     form.innerHTML =`  
@@ -53,6 +56,7 @@ function createTextField(){
 
 // 변수반환    
     return { 
+        typingContent,
         form, 
         bibleTitle,
         textWindow,
@@ -64,12 +68,15 @@ function createTextField(){
 }
 // 반환함수 호출
 const { 
+    typingContent,
+    form,
     bibleTitle,
     textWindow,
     bibleText,
     prevButton,
     nextButton,
-    retryButton }  = createTextField()
+    retryButton 
+}  = createTextField()
 
 // 시편본문가져오기
 async function getBibleText(){
@@ -138,8 +145,6 @@ textWindow.addEventListener('keyup',e=>{
     createTextField()      
     getBibleText()
 
-        
-
     console.log(bibleText.innerHTML)// 디버깅용
     }else if(index == serverData[0].psalms.length - 1){
         alert('마지막 장입니다.')
@@ -153,7 +158,7 @@ prevButton.addEventListener('click', (e)=>{
     if(index > 1)  {
     index--
     typingContent.innerHTML =''
-    createTextField()
+    const {bibleText, bibleTitle} = createTextField()
     getBibleText()
     }
 })
