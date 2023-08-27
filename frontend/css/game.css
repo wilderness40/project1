@@ -10,6 +10,7 @@ main{
     font-size: 1.5rem;
     color: rgb(97, 96, 96);
     font-family: 'Noto Serif KR', serif;
+    margin-bottom: 1rem;
 }
 .bible-content{
     /* border: 1px solid #333; */
@@ -20,32 +21,56 @@ main{
     justify-content: flex-end;
     flex-direction: column;
 }
+.bible-content form{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 .bible-content p{
     font-family: 'Noto Serif KR', serif;
     font-size: 1.5rem;
     color: rgb(160, 160, 160);
     line-height: 1.5;
     margin: 1rem 0;
+    position: relative;
+    display: inline;
 }
 .bible-content span{
     font-family: 'Noto Serif KR', serif;
     font-size: 1.5rem;
     line-height: 1.5;
 }
-.textWindow{
-    font-family: 'Noto Serif KR', serif;
-    width: 100%;
-    height: 160px;
+.textarea-value{
+    position: absolute;
+    top: 0;
+    width: 100%;    
+    height: 100%;
+    left: 0;
     font-size: 1.5rem;
-    color: rgb(160, 160, 160);
-    border: 1px solid rgb(199, 199, 199);
+    color: #333;
+    line-height: 1.5;
+    font-family: 'Noto Serif KR', serif;
+    z-index: 10;
+    white-space: wrap;
+    word-break:break-all; /*글자가 div밖으로 못나가도록설정*/
+}
+.textWindow{
+    position: absolute;
+    top: 0;
+    background-color: transparent;
+    font-family: 'Noto Serif KR', serif;
+    width: 100%;    
+    height: 100%;
+    font-size: 1.5rem;
+    color: transparent;
+    caret-color: rgb(0, 0, 0);
+    border: none;
     line-height: 1.5;
     resize: none;
     outline: none;
-    
-}
-.textWindow:focus{
-    border: 1px solid rgb(155, 155, 155);
+    white-space: wrap;
+    overflow: hidden;
+    z-index: 15;
 }
 .textWindow::placeholder{
     height: 100%;
@@ -59,15 +84,19 @@ main{
 .correct{
     color: #333;
     font-weight: 600;
+    font-family: 'Noto Serif KR', serif;
 }
 .incorrect{
     color: rgb(236, 61, 61);
     font-weight: 600;
+    border-bottom: 2px solid rgb(236, 61, 61);
 }
 /* 버튼 */
 .btn-group{
+    position: relative;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 .prev{
     width: 50px; 
@@ -75,6 +104,7 @@ main{
     cursor: pointer;
     border: none;
     margin-right: .6rem;
+    z-index: 20;
 }
 .prev:hover,
 .next:hover{
@@ -86,7 +116,7 @@ main{
     cursor: pointer;
     border: none;
     margin-right: 1rem;
-
+    z-index: 20;
 }
 .retry{
     width: 60px; 
@@ -95,7 +125,18 @@ main{
     color: #fff;
     border: none;
     cursor: pointer;
+    z-index: 20;
 }
 .retry:hover{
     background-color: rgb(96, 96, 250);  
+}
+.hide{
+    opacity: 0;
+}
+/* 셀렉트 옵션 */
+select{
+position: relative;
+width: 200px;
+z-index: 20;
+/* left: 60%; */
 }

@@ -4,6 +4,7 @@ const main = document.querySelector('main')
 let charIndex = 0
 let index = 1
 let serverData = []
+let newArr = [] 
 
 // 성경 서버데이터 가져오기
 async function getBibleData(){
@@ -20,21 +21,24 @@ async function getBibleData(){
 
 //  HTML 뼈대 DOM생성
 function createTextField(){
-// 테두리 가상 DOM형성
+
+// 가장 바깥의 div (초기화 대상)
     const typingContent = document.createElement('div')
-    typingContent.className = 'bible-content'
+    typingContent.className ='bible-content'
     main.appendChild(typingContent)
     
+
 // 상단 TITLE
     const bibleTitle = document.createElement('h3')
     bibleTitle.innerHTML =`시편&nbsp${index}편`
     bibleTitle.className = 'bible-title'
 
-// 본문 FORM & TEXTAREA & BUTTON   
+// 본문 FORM & TEXTAREA & BUTTON      
     const form = document.createElement('form')
     form.setAttribute("action", '#')
-    form.innerHTML =`  
-    <textarea name="textWindow" class="textWindow" cols="30" rows="10" spellcheck="false" placeholder="필사를 시작해보세요😀" onselectstart ='return false'></textarea>
+    form.innerHTML =`
+    <div class='textarea-value'></div>  
+    <textarea name="textWindow" class="textWindow" spellcheck="false" onselectstart ='return false'></textarea>
     <div class='btn-group'>
     <button class="prev" type="button">이전</button>
     <button class="next" type="button">다음</button>    
@@ -48,9 +52,13 @@ function createTextField(){
     const prevButton = form.querySelector('.prev')
     const nextButton = form.querySelector('.next')
     const retryButton = form.querySelector('.retry')
-
     const bibleText = document.createElement('div')
+    const inputDiv = document.querySelector('.textarea-value')
+    const buttonGroup = document.querySelector('.btn-group')
     bibleText.className = 'bible-Text'
+    
+    typingContent.append(bibleTitle, bibleText)
+   
     typingContent.insertAdjacentElement('afterbegin', bibleTitle) 
     textWindow.insertAdjacentElement('beforebegin', bibleText) 
 
@@ -63,36 +71,41 @@ function createTextField(){
         bibleText,
         prevButton,
         nextButton,
-        retryButton
+        retryButton,
+        inputDiv,
+        buttonGroup
     }
 }
-// 반환함수 호출
-const { 
-    typingContent,
-    form,
-    bibleTitle,
-    textWindow,
-    bibleText,
-    prevButton,
-    nextButton,
-    retryButton 
-}  = createTextField()
+
+
 
 // 시편본문가져오기
-async function getBibleText(){
+async function getBibleText(updateIndex){
+console.log(updateIndex)
 
     await getBibleData()
+// 반환함수 호출
+    const { 
+        typingContent,
+        form,
+        bibleTitle,
+        textWindow,
+        bibleText,
+        prevButton,
+        nextButton,
+        retryButton,
+        inputDiv,
+        buttonGroup
+     }  = createTextField()
 
 // 시편본문 생성하기
     for(let i=0; i < serverData[0].psalms.length - 1; i++){
         if(serverData[0].psalms[i].chapter == index){
             const biblePargraph = document.createElement('p')
-            biblePargraph.innerHTML =`${serverData[0].psalms[i].verse}${serverData[0].psalms[i].content}`
+            biblePargraph.innerHTML =` ${serverData[0].psalms[i].verse} ${serverData[0].psalms[i].content}`
             bibleText.appendChild(biblePargraph)
        }
        }
-       console.log(bibleText)
-
 // 시편본문 한글자씩 풀어서 span태그로 감싸주기   
     const bibletextPara = typingContent.querySelectorAll('.bible-Text p') 
 
@@ -101,36 +114,41 @@ async function getBibleText(){
     }
     
 const textSpan = typingContent.querySelectorAll('span')
-
 // 텍스트 입력창 글자입력 오류검증 기능
-textWindow.addEventListener('keyup',e=>{   
-    console.log(e.key)
+textWindow.addEventListener('keyup',e=>{  
+    console.log(textSpan[0])
     const inputSpanText = e.target.value
-    console.log(charIndex)
+    inputDiv.innerText = inputSpanText
     let typedText = inputSpanText.split('')
-    if(textSpan[charIndex].innerText === typedText[charIndex]){ // 글자가 일치할 경우
+    console.log( textSpan[charIndex].innerText, typedText[charIndex])
+    if(typedText.length){ // 글자 타이핑할때 span 숨기기
+        textSpan[charIndex].classList.add('hide')}
+
+    if(textSpan[charIndex]?.innerText === typedText[charIndex]){ // 글자가 일치할 경우
+        textSpan[charIndex].innerText = typedText[charIndex]
         textSpan[charIndex].classList.add('correct')
         textSpan[charIndex].classList.remove('incorrect')
         charIndex++ 
-    console.log(charIndex)
     e.preventDefault()
-
     }
     else if(typedText[charIndex] == null){  // 글자를 지울 때
-    console.log(charIndex)
-
-        textSpan[charIndex].classList.remove('correct')
-        textSpan[charIndex].classList.remove('incorrect')
-        if(charIndex > 0) charIndex-- 
-    console.log(charIndex)
+        textSpan[charIndex].classList.remove('correct','incorrect', 'hide')
+        if(charIndex > 0) { charIndex-- }
+    }
+    else if(textSpan[textSpan.length-1]?.className){ //마지막 글자가 입력한 값과 같을때 다음버튼 클릭되도록 혹은 클래스가 있을때
+        nextButton.click()
+        console.log('마지막글자')
     }
     else{   // 글자가 불일치할 경우
         textSpan[charIndex].classList.add('incorrect')
+        textSpan[charIndex].classList.remove('correct', 'hide')
+        charIndex++
     }
 })
-
-}
-(async () => await getBibleText())()
+// 본문 클릭시 textarea 커서 활성화
+bibleText.addEventListener('click',(e)=>{
+    textWindow.focus()
+})
 
  // 버튼 클릭 
  // 다음버튼
@@ -138,27 +156,19 @@ textWindow.addEventListener('keyup',e=>{
     e.preventDefault()
     if(index < serverData[0].psalms.length - 1)  {
         index++
-    console.log(bibleText.innerHTML)// 디버깅용
-    console.log(typingContent.innerHTML)
-    typingContent.innerHTML=''
-    console.log(typingContent.innerHTML)
-    createTextField()      
-    getBibleText()
-
-    console.log(bibleText.innerHTML)// 디버깅용
+        main.replaceChildren()
+        await getBibleText()       
     }else if(index == serverData[0].psalms.length - 1){
         alert('마지막 장입니다.')
     }
 })
-
 
  // 이전버튼
 prevButton.addEventListener('click', (e)=>{
     e.preventDefault()
     if(index > 1)  {
     index--
-    typingContent.innerHTML =''
-    const {bibleText, bibleTitle} = createTextField()
+    main.replaceChildren()
     getBibleText()
     }
 })
@@ -168,10 +178,49 @@ retryButton.addEventListener('click',(e)=>{
     e.preventDefault()
     if(index !== 1){
     index = 1
-    typingContent.innerHTML =''
-    createTextField()
+    main.replaceChildren()
     getBibleText()
 }
 })
- 
+
+// 셀렉트 옵션넣기
+for(let i=0; i < serverData[0].psalms.length - 1; i++){
+    newArr.push(serverData[0].psalms[i].chapter)
+}
+let chapters = [...new Set(newArr)]
+
+const select = document.createElement('select')
+buttonGroup.appendChild(select)
+
+for(let i=0; i<chapters.length; i++){
+const option = document.createElement('option')
+option.text = chapters[i]
+select.append(option)
+}
+
+select.addEventListener('change',(e)=>{
+    index = e.target.value
+    for(let i=0; i<e.target.children.length; i++){
+        if(e.target.children[i].value==index){
+        e.target.selectedIndex = i
+        break
+    }
+    }
+    let updateIndex = e.target.selectedIndex 
+    console.log(updateIndex)
+    // Array.from(e.target.children,option => {
+    //     if(e.target.value){
+    //     option.selected = true
+    //     console.log(option.selected)
+    // }
+    // })
+    // e.target.children.map(option=> console.log(option))
+    // e.target.children[0].selected=true
+    main.replaceChildren()
+    getBibleText(updateIndex)
+})
+}
+(async () => await getBibleText())()
+
+
  
