@@ -93,6 +93,7 @@ main{
 }
 /* 버튼 */
 .btn-group{
+    position: relative;
     display: flex;
     justify-content: flex-end;
     margin-top: 2rem;

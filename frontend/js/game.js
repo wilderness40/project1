@@ -202,9 +202,8 @@ select.addEventListener('change',(e)=>{
     index = e.target.value
     console.log(e.target.childNodes)
     main.replaceChildren()
-    getBibleText()
+    getBibleText(updateIndex)
 })
-
 }
 (async () => await getBibleText())()
 
