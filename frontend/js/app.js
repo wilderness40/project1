@@ -8,6 +8,10 @@ const footer = document.querySelector('footer')
 const contents = document.querySelector('.contents')
 const moreViewBtn = document.querySelector('.moreview-btn')
 const form = document.querySelector('form')
+const burgerButton = document.querySelector('.material-symbols-outlined')
+const navButtons = document.querySelector('.nav-btns')
+const mobileBackground = document.querySelector('.mobile-background')
+
 
 let serverData = []
 let updateResults = []
@@ -78,3 +82,11 @@ form.addEventListener('submit', (e) => {
    }
 })    
 
+// 모바일 버거버튼 클릭시
+burgerButton.addEventListener('click',(e) => {
+    console.log(e.target, '버튼')
+    navButtons.classList.toggle('show')
+    mobileBackground.classList.toggle('show')
+
+    
+})
