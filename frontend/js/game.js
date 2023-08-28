@@ -13,7 +13,7 @@ async function getBibleData(){
     const bibleData = await data.json()
     console.log(bibleData)
     serverData.push(bibleData)
-    // console.log(serverData[0].psalms.length)
+    return bibleData
 }catch(error){
     console.log(error)
 }
@@ -54,6 +54,7 @@ function createTextField(){
     const retryButton = form.querySelector('.retry')
     const bibleText = document.createElement('div')
     const inputDiv = document.querySelector('.textarea-value')
+    const buttonGroup = document.querySelector('.btn-group')
     bibleText.className = 'bible-Text'
     
     typingContent.append(bibleTitle, bibleText)
@@ -71,7 +72,8 @@ function createTextField(){
         prevButton,
         nextButton,
         retryButton,
-        inputDiv
+        inputDiv,
+        buttonGroup
     }
 }
 
@@ -79,7 +81,8 @@ function createTextField(){
 
 // 시편본문가져오기
 async function getBibleText(){
-    await getBibleData()
+   await getBibleData()
+//    console.log(serverData)
 // 반환함수 호출
     const { 
         typingContent,
@@ -90,7 +93,8 @@ async function getBibleText(){
         prevButton,
         nextButton,
         retryButton,
-        inputDiv
+        inputDiv,
+        buttonGroup
      }  = createTextField()
 
 // 시편본문 생성하기
@@ -183,9 +187,10 @@ for(let i=0; i < serverData[0].psalms.length - 1; i++){
     newArr.push(serverData[0].psalms[i].chapter)
 }
 let chapters = [...new Set(newArr)]
+chapters.unshift('작성하고 싶은 편수를 선택하세요')
 
 const select = document.createElement('select')
-typingContent.appendChild(select)
+form.appendChild(select)
 
 for(let i=0; i<chapters.length; i++){
 const option = document.createElement('option')
@@ -195,7 +200,7 @@ select.append(option)
 
 select.addEventListener('change',(e)=>{
     index = e.target.value
-    console.log(e.target)
+    console.log(e.target.childNodes)
     main.replaceChildren()
     getBibleText()
 })

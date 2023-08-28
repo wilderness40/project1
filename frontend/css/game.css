@@ -95,6 +95,8 @@ main{
 .btn-group{
     display: flex;
     justify-content: flex-end;
+    margin-top: 2rem;
+    flex-wrap: wrap;
 }
 .prev{
     width: 50px; 
@@ -130,4 +132,16 @@ main{
 }
 .hide{
     opacity: 0;
+}
+/* 셀렉트 옵션부분 */
+select{
+    width: 300px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+}
+
+@media(max-width:615px){
+    select{bottom: 35px;}
 }
