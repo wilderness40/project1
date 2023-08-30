@@ -1,4 +1,5 @@
 // 전역변수
+const main = document.querySelector('main')
 const mainWrapper = document.querySelector('.wrapper')
 const displayBible = document.querySelector('.scripture')
 const scriptureList = document.querySelector('.scripture-list')
@@ -43,6 +44,7 @@ function diplaySource(){
     source.innerText = '개역한글[대한성서공회]'
     source.className = 'source'
     mainWrapper.insertAdjacentElement('beforebegin', source)
+    return source
 }      
 // 성경책 이름 가져오기 (for문 안에 넣으면 안된다)
  function createTitle(firstPage){
@@ -208,6 +210,7 @@ if(!(event && window.location.href.includes('#'))){
     const bibleContents = document.querySelectorAll('.bible-contents') // 뒤로가기 했을때 성경본문 삭제
     bibleContents.forEach((content)=> {
         content.remove()
+
     })    
 
     const pageButton = document.querySelectorAll('button') // 뒤로가기 했을때 하단 페이지네이션 삭제
@@ -215,6 +218,9 @@ if(!(event && window.location.href.includes('#'))){
  
     const bookTitle = mainWrapper.querySelector('.book-title')
     if(bookTitle) mainWrapper.removeChild(bookTitle)  // 뒤로가기 했을때 타이틀 삭제
+
+    const sourceText = document.querySelector('.source')
+    if(sourceText) main.removeChild(sourceText)  // 뒤로가기 했을때 출처문구  삭제
 }
 
 }
