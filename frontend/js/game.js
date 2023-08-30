@@ -115,34 +115,40 @@ async function getBibleText(){
     
 const textSpan = typingContent.querySelectorAll('span')
 // 텍스트 입력창 글자입력 오류검증 기능
-textWindow.addEventListener('keyup',e=>{  
-    console.log(textSpan[0])
+textWindow.addEventListener('input',e=>{  
     const inputSpanText = e.target.value
     inputDiv.innerText = inputSpanText
     let typedText = inputSpanText.split('')
-    console.log( textSpan[charIndex].innerText, typedText[charIndex])
-    if(typedText.length){ // 글자 타이핑할때 span 숨기기
-        textSpan[charIndex].classList.add('hide')}
+    console.log(typedText[textSpan.length-1])
 
+    // console.log( textSpan[charIndex].innerText, typedText[charIndex])
+    if(typedText.length){ // 글자 타이핑할때 span 숨기기
+        textSpan[charIndex]?.classList.add('hide')}
+        
     if(textSpan[charIndex]?.innerText === typedText[charIndex]){ // 글자가 일치할 경우
-        textSpan[charIndex].innerText === typedText[charIndex]
-        textSpan[charIndex].classList.add('correct')
-        textSpan[charIndex].classList.remove('incorrect')
+        textSpan[charIndex]?.innerText === typedText[charIndex]
+        textSpan[charIndex]?.classList.add('correct')
+        textSpan[charIndex]?.classList.remove('incorrect')
         charIndex++ 
-    e.preventDefault()
+        e.preventDefault()
+            
+        if(typedText[textSpan.length-1]){ //마지막 글자가 뭐든 입력됐을때
+                nextButton.click()
+                console.log('마지막글자')  
+        }
     }
     else if(typedText[charIndex] == null){  // 글자를 지울 때
-        textSpan[charIndex].classList.remove('correct','incorrect', 'hide')
+        textSpan[charIndex]?.classList.remove('correct','incorrect', 'hide')
         if(charIndex > 0) { charIndex-- }
     }
-    else if(textSpan[textSpan.length-1]?.className){ //마지막 글자가 입력한 값과 같을때 다음버튼 클릭되도록 혹은 클래스가 있을때
-        nextButton.click()
-        console.log('마지막글자')
-    }
     else{   // 글자가 불일치할 경우
-        textSpan[charIndex].classList.add('incorrect')
-        textSpan[charIndex].classList.remove('correct', 'hide')
+        textSpan[charIndex]?.classList.add('incorrect')
+        textSpan[charIndex]?.classList.remove('correct', 'hide')
         charIndex++
+        if(typedText[textSpan.length-1]){ //마지막 글자가 뭐든 입력됐을때
+            nextButton.click()
+            console.log('마지막글자')  
+    }
     }
 })
 // 본문 클릭시 textarea 커서 활성화

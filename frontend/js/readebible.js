@@ -40,6 +40,7 @@ function deleteTitle(){
 // 출처 표시 : 대한성서공회, 개역한글
 function diplaySource(){
     const source = document.createElement('h4')
+    source.innerText = ''
     source.innerText = '개역한글[대한성서공회]'
     source.className = 'source'
     mainWrapper.insertAdjacentElement('beforebegin', source)
