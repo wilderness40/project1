@@ -9,7 +9,26 @@ router.post('/register', expressAsyncHandler(async(req, res, next)=>{
 }))
 
 router.post('/login', expressAsyncHandler(async(req, res, next)=>{
-    res.json('로그인')
+    const userId = req.body.id
+    const userPw = req.body.pw
+    console.log(id, pw)
+   try{ 
+    const users = await User.find({})
+    if(!users.userId){
+        res.json('존재하지 않는 아이디 입니다')
+        console.log('존재하지 않는 아이디 입니다')
+    }else if(userId !== users.userId || userPw !== users.password){
+        res.json('아이디와 비밀번호를 확인해주세요')
+        console.log('아이디와 비밀번호를 확인해주세요')
+    }
+    else{
+        res.json('로그인 성공')
+        console.log('로그인 성공')        
+    }
+   }catch(err){
+    res.json(err)
+    console.log(err)
+   }
 }))
 
 router.post('/logout', expressAsyncHandler(async(req, res, next)=>{
