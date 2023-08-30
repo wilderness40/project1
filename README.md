@@ -182,9 +182,9 @@ package.json 설치목록
 ### 프로젝트 사용방법
 ------------
 1. 깃허브에 있는  midbar.bibles.json 파일을 MongoDB의 db.midbar.bibles에 업로드 합니다.
-2. backend 폴더의 경로 터미널에서 nodemon index.js 를 입력합니다. (nodemon이 설치되지 않은 경우 npm i nodemon -g를 입력하여 설치한다)
+2. backend 폴더의 경로 터미널에서 nodemon index.js 를 입력합니다. (nodemon이 설치되지 않은 경우 npm i nodemon -g를 입력하여 설치합니다)
 3. frontend 폴더의 index.html을 라이브 서버로 실행합니다.
-4. 사이트 내 조작법은 동영상을 참고해주세요.
+4. 사이트 내 조작법은 상단 동영상(gif)을 참고해주세요.
 
    
 ### 출처 및 참고사이트
