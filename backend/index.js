@@ -8,6 +8,7 @@ const config  = require('./config')
 const biblesRouter = require('../backend/src/routes/bibles')
 const usersRouter = require('../backend/src/routes/users')
 const praysRouter = require('../backend/src/routes/prays')
+const cookieParser = require('cookie-parser')
 
 // 몽고 DB 연결
 mongoose.connect(config.MONGODB_URL)
@@ -23,7 +24,7 @@ let corsOptions = {
 app.use(cors(corsOptions)) // cors 설정, 이걸 계속 빼먹네..
 app.use(express.json()) //request body 파싱 
 app.use(logger('tiny')) // logger 설정
-
+app.use(cookieParser())
 
 app.use('/api/bible', biblesRouter)
 app.use('/api/users', usersRouter)

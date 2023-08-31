@@ -53,3 +53,12 @@ main{
 .submit button:hover{
     background-color: rgb(44, 104, 214);
 }
+.register-section .login-find a{
+    margin-right: 1rem;
+    font-size: .8rem;
+    /* background-color: red; */
+}
+.register-section .login-find a:hover{
+    border-bottom: 1px solid rgb(135, 135, 135);
+    opacity: .5;
+}

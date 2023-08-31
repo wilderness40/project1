@@ -9,10 +9,58 @@ const {
     validationUserPassword
 } = require('../../validator')
 
+const mongoose = require('mongoose')
+const { generateToken } = require('../../auth')
+const { JWT_SECRET } = require('../../config')
+const { Types : {ObjectId} } = mongoose
+
 const router = express.Router()
 
-router.post('/register', expressAsyncHandler(async(req, res, next)=>{
-    res.json('회원가입')
+router.post('/register',[
+    validationUserName(),
+    validationUserEmail(),
+    validationUserId(),
+    validationUserPassword()
+ ], 
+expressAsyncHandler(async(req, res, next)=>{
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        console.log(errors.array())
+        res.status(400).json({
+            code:400,
+            message: 'Invalid Form data for user',
+            error: errors.array()
+        })
+    }else{
+        const user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            userId: req.body.userId,
+            password: req.body.password
+        })
+        const newUser = await user.save() // DB에 User 생성
+        if(!newUser){
+            res.status(401).json({ code:401, message: 'Invalid User Data'})
+        }else{
+            const { name, email, userId, isAdmin, createdAt } = newUser
+            res.cookie('midbar_token', 'generateToken' ,{
+                path:'/',
+                expires: new Date(Date.now() + 3600000),
+                httpOnly: true,
+            })
+            res.json({
+                code:200,
+                token: generateToken(newUser),
+                name, email, userId, isAdmin, createdAt
+            })
+        }
+    }
+    const userName = req.body.name
+    const userId = req.body.userId
+    const userEmail= req.body.email
+    const userPw = req.body.password
+    // form exp
+    
 }))
 
 router.post('/login', expressAsyncHandler(async(req, res, next)=>{
@@ -39,6 +87,7 @@ router.post('/login', expressAsyncHandler(async(req, res, next)=>{
 }))
 
 router.post('/logout', expressAsyncHandler(async(req, res, next)=>{
+    res.clearCookie('midbar_token').redirect('/')
     res.json('로그아웃')
 }))
 
