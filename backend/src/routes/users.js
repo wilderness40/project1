@@ -2,10 +2,48 @@ const express = require('express')
 const User = require('../models/User')
 const expressAsyncHandler = require('express-async-handler')
 
+const mongoose = require('mongoose')
+const { Types : {ObjectId} } = mongoose
+
 const router = express.Router()
 
 router.post('/register', expressAsyncHandler(async(req, res, next)=>{
-    res.json('회원가입')
+    const userName = req.body.name
+    const userId = req.body.userId
+    const userEmail= req.body.email
+    const userPw = req.body.password
+    // form exp
+    try{
+        const users = await User.find({})
+        res.status(200).json({
+            code: 200,
+            message: '회원가입 서버 응답'
+        })
+        if(userEmail == users.email){ // 이메일은 unique 설정되어있으니 버튼없어도 되나?
+            res.json('이미 존재하는 이메일 입니다') 
+            console.log('이미 존재하는 이메일 입니다')
+        }
+        else if(userId == users.userId){  // 아이디 중복체크 버튼 있어야함
+            res.json('이미 존재하는 아이디 입니다') 
+            console.log('이미 존재하는 아이디 입니다')
+        } 
+        else if(!userName || !userEmail || !userName || !userPw){ 
+            res.json('정보를 모두 입력해주세요') 
+            console.log('정보를 모두 입력해주세요')
+        }
+        else
+        {
+            const userData = {
+                id: userId,
+
+            }
+            console.log('가입이 가능합니다')
+
+        }
+    }catch(error){
+        console.log(error)
+        res.status(500).json({error, code:500, message: '오류발생'})
+    }
 }))
 
 router.post('/login', expressAsyncHandler(async(req, res, next)=>{
