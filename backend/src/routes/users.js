@@ -1,6 +1,13 @@
 const express = require('express')
 const User = require('../models/User')
 const expressAsyncHandler = require('express-async-handler')
+const { validationResult } = require('express-validator')
+const {
+    validationUserName,
+    validationUserEmail,
+    validationUserId,
+    validationUserPassword
+} = require('../../validator')
 
 const router = express.Router()
 
